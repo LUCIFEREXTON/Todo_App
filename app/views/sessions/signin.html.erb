@@ -1,0 +1,19 @@
+<h1>LOGIN</h1>
+<div>
+  Don't have an account?<%= link_to "Sign Up", signup_path %>
+</div>
+<div class="container-fluid vh-100 d-flex justify-content-center align-items-center position-absolute top-0" style="z-index:-1;">
+  <%= form_with url:signin_path, class:"row" do|f|%>
+    <div class="mb-3">
+      <%= f.label :name, 'Unique Name', class:'form-label'%>
+      <%=f.text_field :name, class:'form-control', placeholder:'Input your Unique Username'%>
+    </div>
+    <div class="mb-3">
+      <%= f.label :password, 'Password', class:'form-label'%>
+      <%=f.password_field :password, class:'form-control', placeholder:'Input your Unique Username'%>
+    </div>    
+    <div class="col-auto">
+      <%=f.submit :Signin, class:'btn btn-dark'%>
+    </div>
+  <%end%>
+</div>

@@ -1,0 +1,14 @@
+<%# @lists, @todos, i, @selectedListId%>
+<div class="container">
+  <div class="accordion" id="accordionExample">
+    <%if @lists%>
+      <% for i in 0...@lists.size do %>
+        <% if @selected_list_id.to_i == @lists[i].id.to_i %>
+          <%= render "list", list: @lists[i], i:i, todos:@todos %>
+        <% else %>
+          <%= render "list", list: @lists[i], i:i%>
+        <% end %>
+      <% end %>
+    <%end%>
+  </div>
+</div>
