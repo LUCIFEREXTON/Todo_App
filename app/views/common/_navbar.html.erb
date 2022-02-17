@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Your Todos</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">T</span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+      <%if logged_in%>
+        <li class="nav-item">
+          <%= link_to 'Log Out', logout_path, class: 'nav-link'%>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#add_list">
+            Add List
+          </div>
+        </li>        
+      <% else %>
+        <li class="nav-item">
+            <%= link_to 'Sign Up', signup_path, class: 'nav-link'%>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign In', signin_path, class: 'nav-link'%>
+          </li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<% if logged_in %>
+<div class="modal fade" id='add_list' tabindex="-1" aria-labelledby="add_listLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">New List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%=form_with url: add_list_path do |f|%>
+          <div class="mb-3">
+            <%= f.label :list_name, 'List Name', class:'form-label'%>
+            <%=f.text_field :list_name, class:'form-control', placeholder:'List Name'%>
+          </div>
+          <div class="mb-3">
+            <%=f.hidden_field :user_id, value: current_user.id%>
+          </div>
+          <%=f.submit 'Create List', class:'btn btn-dark'%>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
